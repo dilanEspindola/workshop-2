@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
-import useGetData from "../hook/useGetData";
-import { Card } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
+import { GetData } from "../services/data";
+import { url } from "../utils/url";
+import { ListaOfertas } from "../components/ListaOfertas";
+import { ListaPopulares } from "../components/ListaPopulares";
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
 
-  const data = useGetData();
-
-  console.log(data);
+  useEffect(() => {
+    GetData(url).then((res) => setData(res));
+  }, []);
 
   return (
     <div>
-      {data.map((datos) => (
-        <Card style={{ width: "18rem" }} key={datos.id}>
-          <Card.Img variant="top" src={data.images} />
-          <Card.Body>
-            <Card.Title>{datos.title}</Card.Title>
-            <Card.Text>{datos.description}</Card.Text>
-            <Card.Text>{datos.price}</Card.Text>
-          </Card.Body>
-        </Card>
-      ))}
+      <ListaOfertas />
+      <ListaPopulares />
     </div>
   );
 };
