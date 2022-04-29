@@ -11,5 +11,5 @@ export const CarritoProvider = ({ children }) => {
     <Context.Provider value={{ carrito, setCarrito }}>
       {children}
     </Context.Provider>
-  )
-}
+  );
+};

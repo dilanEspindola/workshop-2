@@ -1,13 +1,18 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route  } from 'react-router-dom'
-import Home from './pages/Home'
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import { CarritoProvider } from "./context/CartContext";
 
 const App = () => {
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
-  </BrowserRouter>
-}
+  return (
+    <BrowserRouter>
+      <CarritoProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </CarritoProvider>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
