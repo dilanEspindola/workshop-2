@@ -20,37 +20,87 @@ export const CardProduct = ({ productos }) => {
   };
 
   return (
-    <Card style={{ width: "18rem" }}>
-      <img src={productos.images} alt="" />
-      <Card.Body>
-        <Card.Title>{productos.title}</Card.Title>
-        <Card.Text>{productos.description}</Card.Text>
-        <Card.Text>$ {productos.price}</Card.Text>
-        <Button variant="primary" onClick={handleShow}>
-          Launch demo modal
-        </Button>
-      </Card.Body>
+    <>
+      <aside style={{ width: '192px', height: '420px'}}>
+        <img
+          src={productos.images}
+          alt=""
+          style={{ width: '192px', height: '192px', objectFit: 'cover' }}
+        />
+
+        <div
+          style={{
+              display: 'flex',
+              flexFlow: 'column nowrap',
+              justifyContent: 'space-between',
+              height: '210px',
+              width: '192px',
+              marginTop: '16px'
+          }}
+        >
+          <div>
+            <p className="mb-2 text-base font-bold">
+              ${productos.price}
+            </p>
+            <p className="text-base font-regular">
+              {productos.title}
+            </p>
+          </div>
+
+          <button
+            onClick={handleShow}
+            style={{
+              width: '100%',
+              height: '40px',
+              borderRadius: '8px',
+              backgroundColor: '#0AC763',
+              color: 'white',
+              outline: 'none',
+            }}
+          >
+            Agregar
+          </button>
+        </div>
+      </aside>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>
+          ¿Dónde quieres recibir tu pedido?
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+        <p>
+          Para poder ofrecerte productos dentro de tu área, necesitamos
+          tu dirección.
+        </p>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Control
                 type="text"
                 name="direccion"
                 autoFocus
-                placeholder="direccion"
+                placeholder="Ingresa tu dirección"
                 onChange={({ target }) => setDireccion(target.value)}
               />
             </Form.Group>
-            <Button variant="primary" onClick={handleSubmit}>
-              Save Changes
+
+            <Button
+              className="w-full"
+              variant="primary"
+              onClick={handleSubmit}
+              style={{
+                backgroundColor: '#0AC763',
+                outline: 'none',
+                borderRadius: '8px',
+              }}
+            >
+              Agregar
             </Button>
           </Form>
         </Modal.Body>
       </Modal>
-    </Card>
+    </>
+
   );
 };

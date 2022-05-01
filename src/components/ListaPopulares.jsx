@@ -1,28 +1,32 @@
 import { useState, useEffect } from "react";
-import { GetData } from "../services/data";
-import { filterOfertas } from "../utils/filtraOfertas";
-import { url } from "../utils/url";
-import { Card, Spinner } from "react-bootstrap";
+import { filterPopulares } from "../utils/filtraOfertas";
+import { Spinner } from "react-bootstrap";
 import { CardProduct } from "./CardProduct";
 
 export const ListaPopulares = () => {
-  const [data, setData] = useState(null);
+  const [populares, setPopulares] = useState(null);
 
   useEffect(() => {
-    filterOfertas().then((res) => console.log(res));
-  }, []);
-
-  useEffect(() => {
-    GetData(url).then((res) => setData(res));
+    filterPopulares().then((res) => setPopulares(res));
   }, []);
 
   return (
-    <div>
-      <h1>Lista de mas popular</h1>
-      {!data ? (
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        overflowX: 'scroll',
+        gap: '40px',
+        scrollbarWidth: 'none'
+      }}
+    >
+      {!populares ? (
         <Spinner animation="border" role="status" />
       ) : (
-        data.map((datos) => <CardProduct productos={datos} key={datos.id} />)
+        populares.map((datos) => (
+          <CardProduct productos={datos} key={datos.id} />
+        ))
       )}
     </div>
   );
